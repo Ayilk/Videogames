@@ -11,7 +11,7 @@ const app = express();
 const cors = require('cors');
 app.name = 'API';
 
-server.use(cors());
+app.use(cors());
 //Para poder parsear los archivos json de forma correcta
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));

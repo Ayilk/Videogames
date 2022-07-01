@@ -1,10 +1,18 @@
-const Express = require('express');
-const app = Express();
+const { Router } = require('express');
 
-app.get('/', (req,res) => {
-    res.send('Prueba Técnica Medical Minds')
+
+// const videogamesRouter = require('./Videogames');
+
+
+const router = Router();
+
+
+
+ //router.use('/videogames', videogamesRouter);
+
+
+router.use('/', (req, res) => {
+    res.status(200).send({message: "Ruta principal conectada exitosamente"})
 })
 
-app.listen(3001, () => {
-    console.log("El servidor está escuchando en el puerto 3001")
-})
+module.exports = router;
