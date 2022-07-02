@@ -80,7 +80,22 @@ async function addVideogames(req, res, next){
     next(error)
    }
 }
+
+const gameDelete = (req, res, next) => {
+    const id = req.params.id;
+    return Videogames.destroy({
+        where: {
+            id
+        }
+    }).then(() => {res.status(200).send("Videojuego eliminado con éxito")})
+    .catch(error => next(error))
+}
+
+
+
+
 module.exports = {
     getAllGames,
-    addVideogames
+    addVideogames,
+    gameDelete
 }
