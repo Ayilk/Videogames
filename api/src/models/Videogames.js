@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     },
     description: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },      
     year: {
         type: DataTypes.INTEGER,
