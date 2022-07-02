@@ -90,9 +90,23 @@ async function addVideogames(req, res, next){
 
 async function updateGame(req, res, next){
     const id = req.params.id;
-    let body = req.body;
-    
-    await Videogames.update(body,{
+    let { name, description, developers, year, consoles, image, active} = req.body;
+    const gameUpdate = await Videogames.findByPk(id);
+    const allDevs = await Developers.findAll({
+        where: {
+            name : developers
+        }
+    })
+    // console.log("Videogames", gameUpdate.__proto__)
+    await gameUpdate.setDevelopers(allDevs)
+    const allConsoles = await Consoles.findAll({
+        where:{
+            name: consoles
+        }
+    })
+    await gameUpdate.setConsoles(allConsoles)
+
+    await Videogames.update({ name, description, year, image, active},{
         where: {
             id
         }
