@@ -8,9 +8,9 @@ function getAllConsoles(req, res, next) {
         const results1 = r.data.results
         return axios.get(r.data.next)
         .then(r => {
-            const union = results1.concat(r.data.results)
-            const consoles = union.map(el => el.name)
-            consoles.forEach(el => {
+            const union = results1.concat(r.data.results).map(el => el.name)
+            
+            union.forEach(el => {
                 Consoles.findOrCreate({where: {name: el}})
             });
             Consoles.findAll()

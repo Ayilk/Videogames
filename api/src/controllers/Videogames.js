@@ -23,16 +23,28 @@ function getAllGames(req, res, next) {
                 return games
                           
             })
-        })
+        }).catch(error => next(error))
     }
     const getDbInfo = () => {
         return Videogames.findAll({
-            include: {model: Consoles},
-            include: {model: Developers}
+            include: [
+                {model: Consoles,
+                 attributes:  ["name", "id"] ,
+                 through: {
+                    attributes: [],
+                },
+                },
+                {model: Developers,
+                 attributes:  ["name", "id"] ,
+                 through: {
+                    attributes: [],
+                },
+                } ],
+           
         }).then(r => {
             console.log(r)
             return r
-        })
+        }).catch(error => next(error))
     }
 
    
@@ -45,6 +57,30 @@ function getAllGames(req, res, next) {
       
 }
 
+async function addVideogames(req, res, next){
+   try {
+    let { name, description, developers, year, consoles, image, active, createInDb} = req.body;
+
+    let newGame = await Videogames.create({
+        name, description, year, image, active, createInDb
+    })
+
+    let dev = await Developers.findAll({
+        where: {name: developers}
+    })
+    
+    let cons = await Consoles.findAll({
+        where: {name: consoles}
+    })
+
+    newGame.addDevelopers(dev)
+    newGame.addConsoles(cons)
+    res.send(newGame)
+   } catch (error) {
+    next(error)
+   }
+}
 module.exports = {
-    getAllGames
+    getAllGames,
+    addVideogames
 }

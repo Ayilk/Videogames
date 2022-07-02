@@ -8,10 +8,9 @@ function getAllDevs(req, res, next) {
         const results1 = r.data.results
         return axios.get(r.data.next)
         .then(r => {
-            const union = results1.concat(r.data.results)
-            const consoles = union.map(el => el.name)
+            const union = results1.concat(r.data.results).map(el => el.name)
             
-            consoles.forEach(el => {
+            union.forEach(el => {
                 Developers.findOrCreate({where: {name: el}})
             });
             Developers.findAll()
