@@ -3,6 +3,8 @@ const axios = require('axios');
 const { BASE_URL, API_KEY, GAMES_URL} = process.env;
 
 function getAllGames(req, res, next) {
+   const name = req.query.name;
+
 	const getApiInfo = () => {
         return axios.get(`${BASE_URL}${GAMES_URL}${API_KEY}`)
         .then(r => {
@@ -52,7 +54,12 @@ function getAllGames(req, res, next) {
         .then(r => {
             const [apiInfo, dbInfo] = r;
             const info = apiInfo.concat(dbInfo);
-            res.send(info)
+            if(name){
+                const nameGame = info.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
+                nameGame.length? res.status(200).send(nameGame): res.status(404).send("No está el videojuego")
+            }else{
+                res.send(info)
+            }
         }).catch(error => next(error))
       
 }
