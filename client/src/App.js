@@ -1,11 +1,18 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import LandingPage from './Componentes/LandingPage';
+
 
 function App() {
   return (
-    <div className="App">
-      Hola mundo
+    <BrowserRouter>
+    <div >
+     <Routes>
+      <Route path='/' element={<LandingPage />}/>
+     </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 
