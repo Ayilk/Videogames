@@ -81,6 +81,19 @@ async function addVideogames(req, res, next){
    }
 }
 
+async function updateGame(req, res, next){
+    const id = req.params.id;
+    let body = req.body;
+    
+    await Videogames.update(body,{
+        where: {
+            id
+        }
+    })
+
+    res.send("Videojuego actualizado exitosamente")
+}
+
 const gameDelete = (req, res, next) => {
     const id = req.params.id;
     return Videogames.destroy({
@@ -97,5 +110,6 @@ const gameDelete = (req, res, next) => {
 module.exports = {
     getAllGames,
     addVideogames,
-    gameDelete
+    gameDelete, 
+    updateGame
 }
