@@ -1,4 +1,4 @@
-import { FILTER_BY_CONSOLE, FILTER_BY_CREATED, GET_BY_DEV, GET_BY_NAME, GET_BY_YEAR, GET_CONSOLES, GET_DEVELOPERS, GET_GAMES, ORDER_BY_NAME, ORDER_BY_YEAR } from "../Actions";
+import { FILTER_BY_CONSOLE, FILTER_BY_CREATED, FILTER_BY_DEVELOPER, GET_BY_DEV, GET_BY_NAME, GET_BY_YEAR, GET_CONSOLES, GET_DEVELOPERS, GET_GAMES, ORDER_BY_NAME, ORDER_BY_YEAR } from "../Actions";
 
 
 const initialState = { //Creamos el estado inicial
@@ -79,11 +79,19 @@ function rootReducer(state = initialState, action){
             let filtro1 = allVideogames.filter(v => v.consoles.map(c =>c.name).includes(action.payload))   
             let filtro2 = allVideogames.filter(v => v.consoles.includes(action.payload))       
             let filtro = action.payload === "all" ? allVideogames :  filtro1.concat(filtro2)
-                return {
-                    ...state,
-                    videogames: filtro,
-                }  
-
+            return {
+                ...state,
+                videogames: filtro,
+            }  
+        case FILTER_BY_DEVELOPER:
+            const allVideogamesMore = state.allVideogames;
+            let filtro3 = allVideogamesMore.filter(v => v.developers?.map(c =>c.name).includes(action.payload))   
+            let filtro4 = allVideogamesMore.filter(v => v.developers.includes(action.payload))       
+            let filtro5 = action.payload === "all" ? allVideogames :  filtro3.concat(filtro4)
+            return {
+                ...state,
+                videogames: filtro5,
+            } 
         default:
             return state;    
     }

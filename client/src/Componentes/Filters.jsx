@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-export default function Filters({handleFilterCreated, handleOrderByName, handleOrderByYear, handleFilterConsoles}){
+export default function Filters({handleFilterCreated, handleOrderByName, 
+    handleOrderByYear, handleFilterConsoles, handleFilterDevelopers}){
+        
     const allConsoles = useSelector(state => state.consoles);
+    const allDevelopers = useSelector(state => state.developers);
 
     return(
         <div>
@@ -24,6 +27,11 @@ export default function Filters({handleFilterCreated, handleOrderByName, handleO
                 {allConsoles?.map(c => (
             <option key={c.name} value={c.name}> {c.name} </option>))}
             </select> 
+            <select className="items" onChange={e => handleFilterDevelopers(e)}>
+            <option value="all"> Filtrar por Developers   </option>               
+                {allDevelopers?.map(c => (
+            <option key={c.name} value={c.name}> {c.name} </option>))}
+            </select>
         </div>
     )
 }

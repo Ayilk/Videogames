@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByConsole, filterByCreated, getConsoles, getGames, orderByName, orderByYear } from '../Redux/Actions';
+import { filterByConsole, filterByCreated, filterByDeveloper, getConsoles, getDevelopers, getGames, orderByName, orderByYear } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
@@ -24,6 +24,7 @@ export default function Home(){
     useEffect(() =>{
         dispatch(getGames())
         dispatch(getConsoles())
+        dispatch(getDevelopers())
     }, [dispatch]);
 
     function handleClick(e){
@@ -56,6 +57,12 @@ export default function Home(){
         setOrder(`Ordenado ${e.target.value}`)
     }
 
+    function handleFilterDevelopers(e){
+        e.preventDefault();
+        dispatch(filterByDeveloper(e.target.value))
+        setCurrentPage(1);
+        setOrder(`Ordenado ${e.target.value}`)
+    }
     return(
         <div class="grid-container">
             <header class="header"><h1>VIDEOGAMES APP</h1></header>
@@ -68,6 +75,7 @@ export default function Home(){
                    handleOrderByName={handleOrderByName}
                    handleOrderByYear={handleOrderByYear}
                    handleFilterConsoles={handleFilterConsoles}
+                   handleFilterDevelopers={handleFilterDevelopers}
                 />
                 <SearchBar/>
             </nav>
