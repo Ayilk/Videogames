@@ -11,7 +11,10 @@ export const GET_DEVELOPERS = "GET_DEVELOPERS";
 export const ORDER_BY_YEAR = "ORDER_BY_YEAR";
 export const FILTER_BY_CONSOLE = "FILTER_BY_CONSOLE";
 export const FILTER_BY_DEVELOPER = "FILTER_BY_DEVELOPER";
-
+export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAILS_STATE = "CLEAR_DETAILS_STATE";
+export const LOADER_TRUE = "LOADER_TRUE";
+export const LOADER_FALSE = "LOADER_FALSE"
 
 
 export function getGames(){
@@ -108,3 +111,33 @@ export function filterByDeveloper(payload){
         payload
     }
 }
+
+export function getDetail(id){
+    return async function(dispatch){
+        var json = await axios.get("/videogames/"+ id)
+        return dispatch({
+            type: GET_DETAIL,
+            payload: json.data
+        })
+    }
+}
+
+export function clearDetailsState() {
+    return {
+      type: CLEAR_DETAILS_STATE,
+    };
+  }
+  
+  
+  export function trueLoader() {
+    return {
+      type: LOADER_TRUE,
+    };
+  }
+  
+  
+  export function falseLoader() {
+    return {
+      type: LOADER_FALSE,
+    };
+  }

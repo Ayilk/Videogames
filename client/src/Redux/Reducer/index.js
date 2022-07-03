@@ -1,11 +1,26 @@
-import { FILTER_BY_CONSOLE, FILTER_BY_CREATED, FILTER_BY_DEVELOPER, GET_BY_DEV, GET_BY_NAME, GET_BY_YEAR, GET_CONSOLES, GET_DEVELOPERS, GET_GAMES, ORDER_BY_NAME, ORDER_BY_YEAR } from "../Actions";
+import { 
+    CLEAR_DETAILS_STATE,
+    FILTER_BY_CONSOLE, 
+    FILTER_BY_CREATED, 
+    FILTER_BY_DEVELOPER, 
+    GET_BY_DEV, GET_BY_NAME, 
+    GET_BY_YEAR, GET_CONSOLES, 
+    GET_DETAIL, 
+    GET_DEVELOPERS, 
+    GET_GAMES, 
+    LOADER_FALSE, 
+    LOADER_TRUE, 
+    ORDER_BY_NAME,
+    ORDER_BY_YEAR 
+    } from "../Actions";
 
 
 const initialState = { //Creamos el estado inicial
     videogames: [],
     allVideogames: [],
     consoles: [],
-    developers: []
+    developers: [],
+    detail: []
 }
 
 function rootReducer(state = initialState, action){
@@ -91,7 +106,27 @@ function rootReducer(state = initialState, action){
             return {
                 ...state,
                 videogames: filtro5,
-            } 
+            }
+        case GET_DETAIL:
+            return{
+                ...state,
+                detail: action.payload
+            }
+        case CLEAR_DETAILS_STATE:            
+            return {
+                ...state,
+                detail: [],
+            };
+            case LOADER_TRUE:            
+            return {
+                ...state,
+                loader: true,
+            };
+            case LOADER_FALSE:            
+            return {
+                ...state,
+                loader: false,
+            };    
         default:
             return state;    
     }

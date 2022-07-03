@@ -91,11 +91,13 @@ export default function Home(){
                 currentGames?.map(el => {
                     return(
                         <div>
+                            <Link to={"/home/"+ el.id}>
                             <Card 
                                 name={el.name}
                                 image={el.image}
                                 key={el.id}
                             />  
+                            </Link>
                         </div> 
                     )
                 })
