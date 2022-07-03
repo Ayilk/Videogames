@@ -8,7 +8,7 @@ export default function Card({name, image}){
                 <img 
                     src={image} 
                     alt="Imagen"
-                    width="200px"
+                    width="350px"
                     height="250px" 
                 /> 
             </div>

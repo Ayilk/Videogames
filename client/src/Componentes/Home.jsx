@@ -2,17 +2,19 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByCreated, getGames, orderByName } from '../Redux/Actions';
+import { filterByCreated, getGames, orderByName, orderByYear } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
+import SearchBar from './SearcBar';
+import './Estilos/Home.css';
 
 export default function Home(){
     const dispatch = useDispatch();
     const allVideogames = useSelector(state => state.videogames);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [gamesPerPage, setGamesPerPage] = useState(10);
+    const [gamesPerPage, setGamesPerPage] = useState(9);
     const indexOfLastGame = currentPage * gamesPerPage;
     const indexOfFirstGame = indexOfLastGame - gamesPerPage;
     const currentGames = allVideogames.slice(indexOfFirstGame,indexOfLastGame);
@@ -39,6 +41,13 @@ export default function Home(){
          setOrder(`Ordenado ${e.target.value}`)
     }
 
+    function handleOrderByYear(e){
+        e.preventDefault();
+        dispatch(orderByYear(e.target.value));
+        setCurrentPage(1);
+        setOrder(`Ordenado ${e.target.value}`)
+    }
+
     return(
         <div class="grid-container">
             <header class="header"><h1>VIDEOGAMES APP</h1></header>
@@ -46,7 +55,9 @@ export default function Home(){
                 <Filters
                    handleFilterCreated={handleFilterCreated}
                    handleOrderByName={handleOrderByName}
+                   handleOrderByYear={handleOrderByYear}
                 />
+                <SearchBar/>
             </nav>
             <sidebar class="sidebar">SIDEBAR</sidebar>
             <article class="main"> 
@@ -55,7 +66,8 @@ export default function Home(){
                allVideogames={allVideogames.length}
                paginado={paginado}
             />
-              {
+            <div className='cards'>
+            {
                 currentGames?.map(el => {
                     return(
                         <div>
@@ -67,7 +79,9 @@ export default function Home(){
                         </div> 
                     )
                 })
-              }
+            }
+            </div>
+              
             </article>
             <footer class="footer">FOOTER</footer>
             

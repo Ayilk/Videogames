@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Filters({handleFilterCreated, handleOrderByName}){
+export default function Filters({handleFilterCreated, handleOrderByName, handleOrderByYear}){
     return(
         <div>
-           <select>
+           <select className="items" onChange={e => handleOrderByName(e)}>
             <option value="recientes">Mas Recientes</option>
             <option value="antiguos">Mas Antiguos</option>
            </select> 
