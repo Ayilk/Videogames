@@ -2,16 +2,18 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByConsole, filterByCreated, filterByDeveloper, getConsoles, getDevelopers, getGames, orderByName, orderByYear } from '../Redux/Actions';
+import { filterByConsole, filterByCreated, filterByDeveloper, getConsoles, getDevelopers, getGames, orderByName, orderByYear, trueLoader } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
 import SearchBar from './SearcBar';
+import loading from '../imagenes/loading.gif';
 import './Estilos/Home.css';
 
 export default function Home(){
     const dispatch = useDispatch();
     const allVideogames = useSelector(state => state.videogames);
+    const loader = useSelector(state => state.loader);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [gamesPerPage, setGamesPerPage] = useState(9);
@@ -22,6 +24,7 @@ export default function Home(){
     const [order, setOrder] = useState("");
 
     useEffect(() =>{
+        dispatch(trueLoader())
         dispatch(getGames())
         dispatch(getConsoles())
         dispatch(getDevelopers())
@@ -29,6 +32,7 @@ export default function Home(){
 
     function handleClick(e){
         e.preventDefault();
+        dispatch(trueLoader());
         dispatch(getGames());
     }
 
@@ -65,8 +69,8 @@ export default function Home(){
     }
     return(
         <div class="grid-container">
-            <header class="header"><h1>VIDEOGAMES APP</h1></header>
-            <nav class="nav">
+            <header className="header"><h1>VIDEOGAMES APP</h1></header>
+            <nav className="nav">
             <button className='recargar' onClick= {e => handleClick(e)}>
                 <h3 className='texto-r'>Recargar</h3>
             </button>
@@ -79,33 +83,38 @@ export default function Home(){
                 />
                 <SearchBar/>
             </nav>
-            <sidebar class="sidebar">SIDEBAR</sidebar>
-            <article class="main"> 
+            <sidebar className="sidebar">SIDEBAR</sidebar>
+            
+            <article className="main"> 
             <Paginado
                gamesPerPage={gamesPerPage}
                allVideogames={allVideogames.length}
                paginado={paginado}
+               currentPage={currentPage}
             />
-            <div className='cards'>
-            {
-                currentGames?.map(el => {
-                    return(
-                        <div>
-                            <Link to={"/home/"+ el.id}>
-                            <Card 
-                                name={el.name}
-                                image={el.image}
-                                key={el.id}
-                            />  
-                            </Link>
-                        </div> 
-                    )
-                })
-            }
-            </div>
-              
+
+            {loader? <div><img className='imagen-loader' src={loading} alt ="loading" /> <h1>Cargando . . .</h1></div>:
+                <div className='cards'>
+                {
+                    currentGames?.map(el => {
+                        return(
+                            <div>
+                                <Link to={"/home/"+ el.id}>
+                                <Card 
+                                    name={el.name}
+                                    image={el.image}
+                                    key={el.id}
+                                />  
+                                </Link>
+                            </div> 
+                        )
+                    })
+                }
+                </div>
+            } 
+
             </article>
-            <footer class="footer">FOOTER</footer>
+            <footer className="footer">FOOTER</footer>
             
         </div>
     )

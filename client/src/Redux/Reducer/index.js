@@ -28,6 +28,7 @@ function rootReducer(state = initialState, action){
         case GET_GAMES:
             return {
                 ...state,
+                loader: false,
                 videogames: action.payload,
                 allVideogames: action.payload
             }
@@ -117,12 +118,12 @@ function rootReducer(state = initialState, action){
                 ...state,
                 detail: [],
             };
-            case LOADER_TRUE:            
+        case LOADER_TRUE:            
             return {
                 ...state,
                 loader: true,
             };
-            case LOADER_FALSE:            
+        case LOADER_FALSE:            
             return {
                 ...state,
                 loader: false,
