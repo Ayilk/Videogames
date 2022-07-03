@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByCreated, getGames, orderByName, orderByYear } from '../Redux/Actions';
+import { filterByConsole, filterByCreated, getConsoles, getGames, orderByName, orderByYear } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
@@ -23,6 +23,7 @@ export default function Home(){
 
     useEffect(() =>{
         dispatch(getGames())
+        dispatch(getConsoles())
     }, [dispatch]);
 
     function handleClick(e){
@@ -48,14 +49,25 @@ export default function Home(){
         setOrder(`Ordenado ${e.target.value}`)
     }
 
+    function handleFilterConsoles(e){
+        e.preventDefault();
+        dispatch(filterByConsole(e.target.value))
+        setCurrentPage(1);
+        setOrder(`Ordenado ${e.target.value}`)
+    }
+
     return(
         <div class="grid-container">
             <header class="header"><h1>VIDEOGAMES APP</h1></header>
             <nav class="nav">
+            <button className='recargar' onClick= {e => handleClick(e)}>
+                <h3 className='texto-r'>Recargar</h3>
+            </button>
                 <Filters
                    handleFilterCreated={handleFilterCreated}
                    handleOrderByName={handleOrderByName}
                    handleOrderByYear={handleOrderByYear}
+                   handleFilterConsoles={handleFilterConsoles}
                 />
                 <SearchBar/>
             </nav>

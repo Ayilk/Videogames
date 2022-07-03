@@ -9,6 +9,7 @@ export const GET_BY_DEV = "GET_BY_DEV";
 export const GET_CONSOLES = "GET_CONSOLES";
 export const GET_DEVELOPERS = "GET_DEVELOPERS";
 export const ORDER_BY_YEAR = "ORDER_BY_YEAR";
+export const FILTER_BY_CONSOLE = "FILTER_BY_CONSOLE";
 
 
 
@@ -89,6 +90,13 @@ export function getDevelopers(){
 export function orderByYear(payload){
     return{
         type: ORDER_BY_YEAR,
+        payload
+    }
+}
+
+export function filterByConsole(payload){
+    return{
+        type: FILTER_BY_CONSOLE,
         payload
     }
 }
