@@ -2,6 +2,8 @@ import axios from 'axios';
 
 export const GET_GAMES = "GET_GAMES";
 export const FILTER_BY_CREATED = "FILTER_BY_CREATED";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+
 
 
 export function getGames(){
@@ -17,6 +19,13 @@ export function getGames(){
 export function filterByCreated(payload){
     return{
         type: FILTER_BY_CREATED,
+        payload
+    }
+}
+
+export function orderByName(payload){
+    return{
+        type: ORDER_BY_NAME,
         payload
     }
 }

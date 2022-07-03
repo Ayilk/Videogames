@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function Filters({handleFilterCreated}){
+export default function Filters({handleFilterCreated, handleOrderByName}){
     return(
         <div>
            <select>
             <option value="recientes">Mas Recientes</option>
             <option value="antiguos">Mas Antiguos</option>
            </select> 
-           <select>
-            <option value="asc">Consola A-Z</option>
-            <option value="des">Consola Z-A</option>
+           <select className="items" onChange={e => handleOrderByName(e)}>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
            </select>
            <select className="items" onChange={e => handleFilterCreated(e)}>
             <option value="all">Todos</option>

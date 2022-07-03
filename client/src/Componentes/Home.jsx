@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByCreated, getGames } from '../Redux/Actions';
+import { filterByCreated, getGames, orderByName } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
@@ -17,7 +17,7 @@ export default function Home(){
     const indexOfFirstGame = indexOfLastGame - gamesPerPage;
     const currentGames = allVideogames.slice(indexOfFirstGame,indexOfLastGame);
     const paginado = (pageNumber) => { setCurrentPage(pageNumber)}
-
+    const [order, setOrder] = useState("");
 
     useEffect(() =>{
         dispatch(getGames())
@@ -32,12 +32,20 @@ export default function Home(){
         dispatch(filterByCreated(e.target.value))
     }
 
+    function handleOrderByName(e){
+         e.preventDefault();
+         dispatch(orderByName(e.target.value));
+         setCurrentPage(1);
+         setOrder(`Ordenado ${e.target.value}`)
+    }
+
     return(
         <div class="grid-container">
             <header class="header"><h1>VIDEOGAMES APP</h1></header>
             <nav class="nav">
                 <Filters
                    handleFilterCreated={handleFilterCreated}
+                   handleOrderByName={handleOrderByName}
                 />
             </nav>
             <sidebar class="sidebar">SIDEBAR</sidebar>
