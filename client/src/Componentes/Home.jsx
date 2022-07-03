@@ -2,8 +2,9 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getGames } from '../Redux/Actions';
+import { filterByCreated, getGames } from '../Redux/Actions';
 import Card from './Card';
+import Filters from './Filters';
 import Paginado from './Paginado';
 
 export default function Home(){
@@ -27,10 +28,18 @@ export default function Home(){
         dispatch(getGames());
     }
 
+    function handleFilterCreated(e){
+        dispatch(filterByCreated(e.target.value))
+    }
+
     return(
         <div class="grid-container">
             <header class="header"><h1>VIDEOGAMES APP</h1></header>
-            <nav class="nav">NAV</nav>
+            <nav class="nav">
+                <Filters
+                   handleFilterCreated={handleFilterCreated}
+                />
+            </nav>
             <sidebar class="sidebar">SIDEBAR</sidebar>
             <article class="main"> 
             <Paginado
