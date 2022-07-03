@@ -5,6 +5,7 @@ const { getAllGames, addVideogames, gameDelete, updateGame } = require('../contr
 const router = Router();
 
 router.get('/', getAllGames );
+router.get('/:id', getAllGames );
 router.post('/', addVideogames);
 router.delete('/:id', gameDelete);
 router.put('/:id', updateGame)

@@ -3,6 +3,7 @@ const axios = require('axios');
 const { BASE_URL, API_KEY, GAMES_URL} = process.env;
 
 function getAllGames(req, res, next) {
+   const id = req.params.id;
    const {name, year, developers} = req.query;
 
 	const getApiInfo = () => {
@@ -50,7 +51,7 @@ function getAllGames(req, res, next) {
                 } ],
            
         }).then(r => {
-            console.log(r)
+            //console.log(r)
             return r
         }).catch(error => next(error))
     }
@@ -59,6 +60,7 @@ function getAllGames(req, res, next) {
         Promise.all([getApiInfo(), getDbInfo()])
         .then(r => {
             const [apiInfo, dbInfo] = r;
+            console.log(apiInfo)
             const info = apiInfo.concat(dbInfo);
             if(name){
                 const nameGame = info.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
@@ -71,6 +73,10 @@ function getAllGames(req, res, next) {
             if(developers){
                 const devGame = info.filter(el => el.developers.toLowerCase().includes(developers.toLowerCase()))
                 devGame.length? res.status(200).send(devGame): res.status(404).send("No hay videojuegos con ese developer")
+            }
+            if(id){
+                const idGame = info.filter(el => el.id == id)
+                idGame.length? res.status(200).send(idGame): res.status(404).send("No hay videojuegos con ese id")
             }
             else{
                 res.send(info)
