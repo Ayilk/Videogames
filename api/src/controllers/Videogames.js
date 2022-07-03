@@ -3,7 +3,7 @@ const axios = require('axios');
 const { BASE_URL, API_KEY, GAMES_URL} = process.env;
 
 function getAllGames(req, res, next) {
-   const name = req.query.name;
+   const {name, year, developers} = req.query;
 
 	const getApiInfo = () => {
         return axios.get(`${BASE_URL}${GAMES_URL}${API_KEY}`)
@@ -11,22 +11,28 @@ function getAllGames(req, res, next) {
             const results1 = r.data.results
             return axios.get(r.data.next)
             .then(r => {
-                const union = results1.concat(r.data.results)
-                const games = union.map(el => {
-                    return{
-                        id: el.id,
-                        name: el.name,
-                        year: parseInt(el.released.slice(0,4),10),
-                        consoles: el.platforms.map(el => el.platform.name),
-                        image: el.background_image,
-                        active: true
-                    }
+                const results2 = r.data.results
+                return axios.get(r.data.next)
+                .then(r => {
+                    const union = results1.concat(results2).concat(r.data.results)
+                    const games = union.map(el => {
+                        return{
+                            id: el.id,
+                            name: el.name,
+                            year: parseInt(el.released.slice(0,4),10),
+                            consoles: el.platforms.map(el => el.platform.name),
+                            image: el.background_image,
+                            active: true
+                        }
+                    })
+                    return games
                 })
-                return games
+                
                           
             })
         }).catch(error => next(error))
     }
+
     const getDbInfo = () => {
         return Videogames.findAll({
             include: [
@@ -57,7 +63,16 @@ function getAllGames(req, res, next) {
             if(name){
                 const nameGame = info.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
                 nameGame.length? res.status(200).send(nameGame): res.status(404).send("No está el videojuego")
-            }else{
+            }
+            if(year){
+                const yearGame = info.filter(el => el.year == year)
+                yearGame.length? res.status(200).send(yearGame): res.status(404).send("No hay videojuegos con ese año")
+            }
+            if(developers){
+                const devGame = info.filter(el => el.developers.toLowerCase().includes(developers.toLowerCase()))
+                devGame.length? res.status(200).send(devGame): res.status(404).send("No hay videojuegos con ese developer")
+            }
+            else{
                 res.send(info)
             }
         }).catch(error => next(error))
