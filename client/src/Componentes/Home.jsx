@@ -11,6 +11,7 @@ import SearchBar from './SearcBar';
 import loading from '../imagenes/loading.gif';
 import '../Estilos/Home.css';
 import Footer from './Footer';
+import SideBar from './SideBar';
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -96,7 +97,9 @@ export default function Home(){
                 </div>
                 
             </nav>
-            <sidebar className="sidebar">SIDEBAR</sidebar>
+            <sidebar className="sidebar">
+                <SideBar/>
+            </sidebar>
             
             <article className="main"> 
             <Paginado
