@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getByDev, getByName, getByYear } from '../Redux/Actions';
-//import '../Estilos/SearchBar.css'
+import '../Estilos/SearchBar.css'
 
 export default function SearchBar(){
     const dispatch = useDispatch();

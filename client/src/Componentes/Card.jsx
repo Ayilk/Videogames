@@ -1,15 +1,16 @@
 import React from "react";
+import '../Estilos/Card.css'
 
 export default function Card({name, image}){
     return(
-        <div>
-            <div>{name}</div>
+        <div className="contenedor">
+            <div >{name}</div>
             <div>
                 <img 
                     src={image} 
                     alt="Imagen"
-                    width="350px"
-                    height="250px" 
+                    width="200px"
+                    height="200px" 
                 /> 
             </div>
         </div>

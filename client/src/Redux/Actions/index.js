@@ -14,7 +14,8 @@ export const FILTER_BY_DEVELOPER = "FILTER_BY_DEVELOPER";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAR_DETAILS_STATE = "CLEAR_DETAILS_STATE";
 export const LOADER_TRUE = "LOADER_TRUE";
-export const LOADER_FALSE = "LOADER_FALSE"
+export const LOADER_FALSE = "LOADER_FALSE";
+ 
 
 
 export function getGames(){
@@ -140,4 +141,11 @@ export function clearDetailsState() {
     return {
       type: LOADER_FALSE,
     };
+  }
+
+  export function postGame(payload){
+    return async function(dispatch){
+        const json = await axios.post("/videogames", payload);
+        return json;
+    }
   }

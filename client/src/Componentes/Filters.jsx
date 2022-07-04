@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import '../Estilos/Filters.css'
 
 export default function Filters({handleFilterCreated, handleOrderByName, 
     handleOrderByYear, handleFilterConsoles, handleFilterDevelopers}){

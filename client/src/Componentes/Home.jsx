@@ -2,13 +2,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { filterByConsole, filterByCreated, filterByDeveloper, getConsoles, getDevelopers, getGames, orderByName, orderByYear, trueLoader } from '../Redux/Actions';
+import { filterByConsole, filterByCreated, filterByDeveloper, getConsoles, 
+         getDevelopers, getGames, orderByName, orderByYear, trueLoader } from '../Redux/Actions';
 import Card from './Card';
 import Filters from './Filters';
 import Paginado from './Paginado';
 import SearchBar from './SearcBar';
 import loading from '../imagenes/loading.gif';
-import './Estilos/Home.css';
+import '../Estilos/Home.css';
+import Footer from './Footer';
 
 export default function Home(){
     const dispatch = useDispatch();
@@ -69,19 +71,30 @@ export default function Home(){
     }
     return(
         <div class="grid-container">
-            <header className="header"><h1>VIDEOGAMES APP</h1></header>
+            <header className="header">
+                <Link to='/' className='link-header'>
+                <h1>VIDEOGAMES APP</h1>
+                </Link>
+            </header>
             <nav className="nav">
-            <button className='recargar' onClick= {e => handleClick(e)}>
-                <h3 className='texto-r'>Recargar</h3>
-            </button>
-                <Filters
-                   handleFilterCreated={handleFilterCreated}
-                   handleOrderByName={handleOrderByName}
-                   handleOrderByYear={handleOrderByYear}
-                   handleFilterConsoles={handleFilterConsoles}
-                   handleFilterDevelopers={handleFilterDevelopers}
-                />
-                <SearchBar/>
+                <div className='bars'>
+                    <SearchBar/>
+                    <Link to="/new-videogame">
+                    <button className='crear-videogame'> Crea un nuevo videojuego</button>
+                    </Link>    
+                    
+                    <Filters
+                    handleFilterCreated={handleFilterCreated}
+                    handleOrderByName={handleOrderByName}
+                    handleOrderByYear={handleOrderByYear}
+                    handleFilterConsoles={handleFilterConsoles}
+                    handleFilterDevelopers={handleFilterDevelopers}
+                    />
+                    <button className='recargar' onClick= {e => handleClick(e)}>
+                        <h3 className='texto-r'>Recargar</h3>
+                    </button>
+                </div>
+                
             </nav>
             <sidebar className="sidebar">SIDEBAR</sidebar>
             
@@ -98,8 +111,8 @@ export default function Home(){
                 {
                     currentGames?.map(el => {
                         return(
-                            <div>
-                                <Link to={"/home/"+ el.id}>
+                            <div className='card-u'>
+                                <Link to={"/home/"+ el.id} className="name-card">
                                 <Card 
                                     name={el.name}
                                     image={el.image}
@@ -114,7 +127,9 @@ export default function Home(){
             } 
 
             </article>
-            <footer className="footer">FOOTER</footer>
+            <footer className="footer">
+                <Footer/>
+            </footer>
             
         </div>
     )

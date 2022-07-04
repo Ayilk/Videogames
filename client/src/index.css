@@ -12,6 +12,7 @@ body {
     font-family: "Public Sans", sans-serif;
     font-size: 1.2rem;
     min-height: 100%;
+    background-color: snow;
 }
 
 .grid-container > * {
@@ -22,22 +23,22 @@ body {
 }
 .header {
     grid-area: header;
-    background-color: #85aedd;
+    background-color: #05b8e4;
 }
 
 .nav {
     grid-area: nav;
-    background-color: #afd6af;
+    background-color: #07cd87;
 }
 
 .sidebar {
     grid-area: sidebar;
-    background-color: #fdcfcf;
+    background-color: #ff8ea1;
 }
 
 .main {
     grid-area: main;
-    background-color: #f5f5f5;
+    background-color: #9c89b8;
 }
 
 .footer {
@@ -67,7 +68,7 @@ body {
         "footer footer"; */
 
         grid-template: 
-        "header header" 100px
+        "header header" auto
         "nav nav"       50px
         "main sidebar"  auto
         "footer footer" 100px / 
@@ -86,8 +87,8 @@ body {
         "footer footer"; */
 
         grid-template: 
-        "header header " 100px  
-        "nav nav"      75px
+        "header header " auto  
+        "nav nav"      auto
         "main sidebar"  auto
         "footer footer " 100px / 
         auto 200px     ;

@@ -1,5 +1,5 @@
 import React from "react";
-import './Estilos/Paginado.css';
+import '../Estilos/Paginado.css';
 
 
 export default function Paginado({gamesPerPage, allVideogames, paginado, currentPage}) {
@@ -30,7 +30,9 @@ export default function Paginado({gamesPerPage, allVideogames, paginado, current
               pageNumbers.map((number) => (
               
                 <li className="li" key={number}>
+                  <button className="boton-paginado">
                   <a className="link" onClick={() => paginado(number)}>{number}</a>
+                  </button>
                 </li>
                 
               ))}

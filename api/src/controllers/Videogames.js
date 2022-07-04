@@ -60,7 +60,7 @@ function getAllGames(req, res, next) {
         Promise.all([getApiInfo(), getDbInfo()])
         .then(r => {
             const [apiInfo, dbInfo] = r;
-            console.log(apiInfo)
+            //console.log(apiInfo)
             const info = apiInfo.concat(dbInfo);
             if(name){
                 const nameGame = info.filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
