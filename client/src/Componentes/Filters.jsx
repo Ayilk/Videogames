@@ -28,11 +28,11 @@ export default function Filters({handleFilterCreated, handleOrderByName,
                 {allConsoles?.map(c => (
             <option key={c.name} value={c.name}> {c.name} </option>))}
             </select> 
-            <select className="items" onChange={e => handleFilterDevelopers(e)}>
+            {/* <select className="items" onChange={e => handleFilterDevelopers(e)}>
             <option value="all"> Filtrar por Developers   </option>               
                 {allDevelopers?.map(c => (
             <option key={c.name} value={c.name}> {c.name} </option>))}
-            </select>
+            </select> */}
         </div>
     )
 }
