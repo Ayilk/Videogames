@@ -6,7 +6,7 @@ Dentro del archivo, ubicarse en el fichero /api y ejecutar `npm start`
 
 ## Para levantar la aplicación
 
-Dentro del archivo, ubicarse en el fichero /cliento y ejecutar `npm start`
+Dentro del archivo, ubicarse en el fichero /client y ejecutar `npm start`
 
 > Recuerde hacer `npm install` en cada fichero
 
@@ -17,8 +17,10 @@ __Videogames__
   - GET, POST http://localhost:3001/videogames
   - GET http://localhost:3001/videogames?name={input}
   - GET, PUT, DELETE http://localhost:3001/videogames/:id
+
 __Developers__
   - GET http://localhost:3001/developers  
+
 __Consoles__
   - GET http://localhost:3001/developers
 
