@@ -8,3 +8,9 @@ html, body{
     min-width: 100vh;
     min-height: 100px;
 }
+
+#nav-var {
+    width: 100%;
+    min-width: 100vh;
+    min-height: 100px;
+}
