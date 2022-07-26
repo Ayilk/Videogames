@@ -1,24 +1,31 @@
 
-
-
-<div class="row" ((show))="getVideogames()">
-  <div *ngFor="let game of videogames" class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
-    
-    
-        <div class="card" style="width: 18rem;" >
-          <img 
-            class="card-img-top" 
-            [src]="game.image" 
-            alt="Card image cap"
-          >
-          <div class="card-body">                
-            <a href="#" class="btn btn-primary">
-               <h5 class="card-title">{{game.name}}</h5>  
-            </a>
-          </div>
-        </div>
-
-        
-      
-  </div>
+<div *ngIf="videogames.length<1; else divVideogames "  
+class="alert alert-info text-center">
+<h1>Cargando...</h1>
 </div>
+
+<ng-template #divVideogames>
+  <div class="row" >
+    <div *ngFor="let game of videogames" class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
+      
+      
+          <div class="card" style="width: 18rem;" >
+            <img 
+              class="card-img-top" 
+              [src]="game.image" 
+              alt="Card image cap"
+            >
+            <div class="card-body">                
+              <a href="#" class="btn btn-primary">
+                 <h5 class="card-title">{{game.name}}</h5>  
+              </a>
+            </div>
+          </div>
+  
+          
+        
+    </div>
+  </div>
+
+</ng-template>
+
