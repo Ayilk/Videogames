@@ -1,8 +1,24 @@
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="https://i.gifer.com/fetch/w300-preview/38/389191ba50aadad04e6c1bbf7f25a73d.gif" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+
+
+
+<div class="row" ((show))="getVideogames()">
+  <div *ngFor="let game of videogames" class="col-md-4 col-sm-6 animate__animated animate__fadeIn">
+    
+    
+        <div class="card" style="width: 18rem;" >
+          <img 
+            class="card-img-top" 
+            [src]="game.image" 
+            alt="Card image cap"
+          >
+          <div class="card-body">                
+            <a href="#" class="btn btn-primary">
+               <h5 class="card-title">{{game.name}}</h5>  
+            </a>
+          </div>
+        </div>
+
+        
+      
   </div>
+</div>

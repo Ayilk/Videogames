@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Game } from '../Interfaces/interfaces';
+import { CardsService } from '../service/cards.service';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit{
+  videogames: Game[] = [];
 
-  constructor() { }
+  constructor(private cardService: CardsService) {}
 
-  ngOnInit(): void {
+  getVideogames() {
+    this.cardService.getVIdeogames().subscribe((games) => {
+      this.videogames = games;
+    });
   }
 
+  ngOnInit(): void {
+   
+    this.getVideogames()
+  }
 }

@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
+import { CardsComponent } from './cards/cards/cards.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  // {
+  //   path:'',
+  //   component: CardsComponent,
+  //   pathMatch: 'full'
+  // },
+  // {
+
+  // }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
