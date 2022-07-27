@@ -1,1 +1,16 @@
-<p>search-bar works!</p>
+<form (ngSubmit)="buscar()" autocomplete="off" class="input-group mb-3">
+
+    <input type="text" 
+           [(ngModel)]="termino"            
+           class="form-control"
+           placeholder="Buscar videojuego ..." 
+           aria-label="Buscar" 
+           aria-describedby="button-addon2">
+
+    <button class="btn btn-outline-secondary" 
+            type="button" 
+            id="button-addon2">
+            Buscar
+    </button>
+
+</form>

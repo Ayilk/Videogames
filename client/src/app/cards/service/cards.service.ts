@@ -16,4 +16,9 @@ export class CardsService {
     const url = `${this.dbUrl}/videogames`;
     return this.http.get<Game[]>(url)
   }
+
+  getVIdeogamesByName(termino: string) :Observable<Game[]>{
+    const url = `${this.dbUrl}/videogames?name=${termino}`;
+    return this.http.get<Game[]>(url)
+  }
 }

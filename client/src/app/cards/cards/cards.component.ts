@@ -8,6 +8,8 @@ import { CardsService } from '../service/cards.service';
   styles: [],
 })
 export class CardsComponent implements OnInit{
+
+  termino: string = '';
   videogames: Game[] = [];
 
   constructor(private cardService: CardsService) {}
@@ -17,6 +19,12 @@ export class CardsComponent implements OnInit{
       this.videogames = games;
     });
   }
+  getVideogamesByName(termino: string){
+    this.cardService.getVIdeogamesByName(this.termino).subscribe(game => {
+      this.videogames = game
+    })
+  }
+
 
   ngOnInit(): void {
    
